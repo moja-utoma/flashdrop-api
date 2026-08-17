@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Flashdrop.API/Flashdrop.API.csproj" />
+  <Project Path="Flashdrop.Tests/Flashdrop.Tests.csproj" />
+</Solution>
