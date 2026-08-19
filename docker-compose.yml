@@ -1,0 +1,31 @@
+services:
+  redis:
+    image: redis:latest
+    container_name: flashdrop-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  rabbitmq:
+    image: rabbitmq:4.3.5-management-alpine
+    container_name: flashdrop-rabbitmq
+    ports:
+      - "5672:5672"   # AMQP port (used by your app)
+      - "15672:15672" # Management UI (http://localhost:15672, guest/guest)
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  redis-data:
+  rabbitmq-data:
