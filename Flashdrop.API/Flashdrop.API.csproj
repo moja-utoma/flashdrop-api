@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Flashdrop.Application\Flashdrop.Application.csproj" />
     <ProjectReference Include="..\Flashdrop.Data\Flashdrop.Data.csproj" />
   </ItemGroup>
 

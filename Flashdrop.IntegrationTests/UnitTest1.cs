@@ -1,4 +1,4 @@
-﻿namespace Flashdrop.Tests;
+﻿namespace Flashdrop.IntegrationTests;
 
 public class UnitTest1
 {

@@ -20,6 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Flashdrop.API\Flashdrop.API.csproj" />
+    <ProjectReference Include="..\Flashdrop.Application\Flashdrop.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
 
