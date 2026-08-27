@@ -1,7 +1,7 @@
 <Solution>
   <Folder Name="/tests/">
     <Project Path="Flashdrop.IntegrationTests/Flashdrop.IntegrationTests.csproj" Id="f2994967-e40d-4014-ae24-007bb7573773" />
-    <Project Path="Flashdrop.Tests/Flashdrop.UnitTests.csproj" />
+    <Project Path="Flashdrop.UnitTests/Flashdrop.UnitTests.csproj" />
   </Folder>
   <Project Path="Flashdrop.API/Flashdrop.API.csproj" />
   <Project Path="Flashdrop.Application/Flashdrop.Application.csproj" Id="fbfa976e-b7d3-4a33-a6bd-7d7467a3f474" />
