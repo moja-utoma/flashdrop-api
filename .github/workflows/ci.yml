@@ -18,5 +18,7 @@ jobs:
         run: dotnet restore
       - name: Build
         run: dotnet build --no-restore --configuration Release
-      - name: Test
-        run: dotnet test --no-build --configuration Release
+      - name: Unit tests
+        run: dotnet test Flashdrop.UnitTests --configuration Release
+      - name: Integration tests
+        run: dotnet test Flashdrop.IntegrationTests --configuration Release
