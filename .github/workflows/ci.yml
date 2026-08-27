@@ -19,6 +19,6 @@ jobs:
       - name: Build
         run: dotnet build --no-restore --configuration Release
       - name: Unit tests
-        run: dotnet test tests/Flashdrop.UnitTests --configuration Release
+        run: dotnet test Flashdrop.UnitTests --configuration Release
       - name: Integration tests
-        run: dotnet test tests/Flashdrop.IntegrationTests --configuration Release
+        run: dotnet test Flashdrop.IntegrationTests --configuration Release
