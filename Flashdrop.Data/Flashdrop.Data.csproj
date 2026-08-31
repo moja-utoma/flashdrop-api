@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Flashdrop.Application\Flashdrop.Application.csproj" />
+    <ProjectReference Include="..\Flashdrop.Domain\Flashdrop.Domain.csproj" />
   </ItemGroup>
 
 </Project>
