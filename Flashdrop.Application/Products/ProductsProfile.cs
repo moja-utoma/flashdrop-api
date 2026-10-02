@@ -11,7 +11,10 @@ public class ProductsProfile : Profile
     {
         CreateMap<Product, ProductDto>();
         CreateMap<Product, ProductForListDto>();
-        CreateMap<CreateProductRequest, Product>();
-        CreateMap<UpdateProductRequest, Product>();
+        CreateMap<CreateProductRequest, Product>()
+            .ValidateMemberList(MemberList.Source);
+        CreateMap<UpdateProductRequest, Product>()
+            .ValidateMemberList(MemberList.Source);
     }
 }
+
