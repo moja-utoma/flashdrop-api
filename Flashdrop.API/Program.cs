@@ -1,4 +1,8 @@
+using Flashdrop.Application.Interfaces.Repositories;
+using Flashdrop.Application.Products;
 using Flashdrop.Data;
+using Flashdrop.Data.Entities;
+using Flashdrop.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using RabbitMQ.Client;
 
@@ -37,6 +41,15 @@ builder.Services.AddSingleton<IConnectionFactory>(sp =>
         Password = config["Password"]
     };
 });
+
+builder.Services.AddAutoMapper(cfg => { }, typeof(ProductsProfile).Assembly);
+
+//repos
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IRepository<Product>, ProductRepository>();
+
+//services
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 

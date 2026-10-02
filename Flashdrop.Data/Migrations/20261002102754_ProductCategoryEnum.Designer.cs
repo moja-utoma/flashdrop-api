@@ -4,6 +4,7 @@ using Flashdrop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Flashdrop.Data.Migrations
 {
     [DbContext(typeof(FlashdropDbContext))]
-    partial class FlashdropDbContextModelSnapshot : ModelSnapshot
+    [Migration("20261002102754_ProductCategoryEnum")]
+    partial class ProductCategoryEnum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

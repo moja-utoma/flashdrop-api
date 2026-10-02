@@ -12,10 +12,20 @@ public class Product
     public string Description { get; set; } = null!;
     public string? ImageUrl { get; set; }
     public decimal BasePrice { get; set; }
-    public string? Category { get; set; }
+    public ProductCategory Category { get; set; }
     public DateTimeOffset CreatedAt { get; set; }
 
     // Navigation properties
     public User Seller { get; set; } = null!;
     public ICollection<Sale> Sales { get; set; } = [];
+}
+
+public enum ProductCategory
+{
+    Electronics,
+    Fashion,
+    HomeAndLiving,
+    Collectibles,
+    Sports,
+    Other
 }

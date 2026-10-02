@@ -1,16 +1,17 @@
 ﻿using Flashdrop.Application.Interfaces.Repositories;
 using Flashdrop.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Flashdrop.Data.Repositories;
 
 public class ProductRepository
-    (FlashdropDbContext context) : IProductRepository
+    (FlashdropDbContext context) : IRepository<Product>
 {
     private readonly FlashdropDbContext _context = context;
 
-    public async Task<Product?> GetByIdAsync(Guid id)
+    public async Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _context.Products.FindAsync(id);
+        return await _context.Products.FindAsync(id, cancellationToken);
     }
 
     public IQueryable<Product> GetAll()
@@ -18,17 +19,18 @@ public class ProductRepository
         return _context.Products;
     }
 
-    public async Task Create(Product product)
+    public async Task CreateAsync(Product product, CancellationToken cancellationToken = default)
     {
-        await _context.Products.AddAsync(product);
+        await _context.Products.AddAsync(product, cancellationToken);
     }
 
-    public async Task Delete(Guid id)
+    public void Delete(Product product, CancellationToken cancellationToken = default)
     {
-        var product = await _context.Products.FindAsync(id);
-        if (product != null)
-        {
-            _context.Products.Remove(product);
-        }
+        _context.Products.Remove(product);
+    }
+
+    public async Task<bool> ExistsByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        return await _context.Products.AnyAsync(p => p.Id == id, cancellationToken);
     }
 }
