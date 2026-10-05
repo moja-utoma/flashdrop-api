@@ -3,7 +3,7 @@ using Flashdrop.Application.Common.Exceptions;
 using Flashdrop.Application.Interfaces.Repositories;
 using Flashdrop.Application.Products;
 using Flashdrop.Application.Products.DTOs.Requests;
-using Flashdrop.Data.Entities;
+using Flashdrop.Domain.Entities;
 using Microsoft.Extensions.Logging;
 using Moq;
 

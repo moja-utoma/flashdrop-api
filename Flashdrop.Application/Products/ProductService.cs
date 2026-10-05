@@ -4,7 +4,7 @@ using Flashdrop.Application.Common.Extensions;
 using Flashdrop.Application.Interfaces.Repositories;
 using Flashdrop.Application.Products.DTOs.Requests;
 using Flashdrop.Application.Products.DTOs.Response;
-using Flashdrop.Data.Entities;
+using Flashdrop.Domain.Entities;
 
 namespace Flashdrop.Application.Products;
 
@@ -41,7 +41,7 @@ public class ProductService
         var product = _mapper.Map<Product>(productDto);
         product.ImageUrl = "https://via.placeholder.com/150";
         product.CreatedAt = DateTimeOffset.UtcNow;
-        product.Seller = await _defaultEntities.GetDefaultSellerAsync();
+        product.Seller = await _defaultEntities.GetDefaultSellerAsync(cancellationToken);
 
         await _productRepository.CreateAsync(product, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

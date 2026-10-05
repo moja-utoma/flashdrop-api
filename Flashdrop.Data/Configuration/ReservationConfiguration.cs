@@ -1,4 +1,4 @@
-using Flashdrop.Data.Entities;
+using Flashdrop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

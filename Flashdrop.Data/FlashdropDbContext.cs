@@ -1,4 +1,5 @@
 using Flashdrop.Data.Configuration;
+using Flashdrop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Flashdrop.Data;

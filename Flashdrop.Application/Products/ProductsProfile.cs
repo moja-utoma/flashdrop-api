@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Flashdrop.Application.Products.DTOs.Requests;
 using Flashdrop.Application.Products.DTOs.Response;
-using Flashdrop.Data.Entities;
+using Flashdrop.Domain.Entities;
 
 namespace Flashdrop.Application.Products;
 

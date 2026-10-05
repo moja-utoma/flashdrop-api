@@ -1,9 +1,9 @@
 using Flashdrop.Application.Interfaces.Repositories;
 using Flashdrop.Application.Products;
 using Flashdrop.Data;
-using Flashdrop.Data.Entities;
 using Flashdrop.Data.Extensions;
 using Flashdrop.Data.Repositories;
+using Flashdrop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using RabbitMQ.Client;
 

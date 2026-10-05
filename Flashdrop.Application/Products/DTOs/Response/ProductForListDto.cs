@@ -1,4 +1,4 @@
-﻿using Flashdrop.Data.Entities;
+﻿using Flashdrop.Domain.Entities;
 
 namespace Flashdrop.Application.Products.DTOs.Response;
 

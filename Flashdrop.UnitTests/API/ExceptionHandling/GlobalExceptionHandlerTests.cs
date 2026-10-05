@@ -1,6 +1,6 @@
 ﻿using Flashdrop.API.ExceptionHandling;
 using Flashdrop.Application.Common.Exceptions;
-using Flashdrop.Data.Entities;
+using Flashdrop.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging.Abstractions;
 
@@ -31,7 +31,7 @@ public class GlobalExceptionHandlerTests
     public async Task AppValidationException_ReturnsStatus400WithErrors()
     {
         var context = CreateHttpContext();
-        var errors = new Dictionary<string, string[]> { ["quantity"] = new[] { "Must be greater than 0." } };
+        var errors = new Dictionary<string, string[]> { ["quantity"] = ["Must be greater than 0."] };
         var exception = new AppValidationException(errors);
 
         var handled = await _handler.TryHandleAsync(context, exception, CancellationToken.None);

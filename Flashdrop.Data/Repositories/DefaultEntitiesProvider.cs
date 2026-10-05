@@ -1,5 +1,5 @@
 ﻿using Flashdrop.Application.Interfaces.Repositories;
-using Flashdrop.Data.Entities;
+using Flashdrop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Flashdrop.Data.Repositories;
