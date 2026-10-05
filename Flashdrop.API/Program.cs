@@ -1,55 +1,11 @@
-using Flashdrop.Application.Interfaces.Repositories;
-using Flashdrop.Application.Products;
-using Flashdrop.Data;
-using Flashdrop.Data.Entities;
-using Flashdrop.Data.Repositories;
-using Microsoft.EntityFrameworkCore;
-using RabbitMQ.Client;
+using Flashdrop.API.Extensions;
+using Flashdrop.Data.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-
-// Configure Entity Framework Core
-builder.Services.AddDbContext<FlashdropDbContext>(options =>
-{
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        sqlOptions => sqlOptions.MigrationsAssembly("Flashdrop.Data"));
-});
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddStackExchangeRedisCache(options =>
-{
-    options.Configuration = builder.Configuration.GetConnectionString("Redis");
-});
-
-builder.Services.AddSingleton<IConnectionFactory>(sp =>
-{
-    var config = builder.Configuration.GetSection("RabbitMq");
-    return new ConnectionFactory
-    {
-        HostName = config["HostName"],
-        Port = int.Parse(config["Port"]!),
-        UserName = config["UserName"],
-        Password = config["Password"]
-    };
-});
-
-builder.Services.AddAutoMapper(cfg => { }, typeof(ProductsProfile).Assembly);
-
-//repos
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IRepository<Product>, ProductRepository>();
-
-//services
-builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddApplicationServices(builder.Configuration);
 
 var app = builder.Build();
 
@@ -68,5 +24,11 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Seed database if empty
+if (app.Environment.IsDevelopment())
+{
+    await app.Services.SeedDatabaseAsync();
+}
 
 app.Run();

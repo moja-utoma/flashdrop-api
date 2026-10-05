@@ -11,11 +11,13 @@ namespace Flashdrop.Application.Products;
 public class ProductService
     (IUnitOfWork unitOfWork,
     IRepository<Product> productRepository,
-    IMapper mapper) : IProductService
+    IMapper mapper,
+    IDefaultEntitiesProvider defaultEntities) : IProductService
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
     private readonly IRepository<Product> _productRepository = productRepository;
     private readonly IMapper _mapper = mapper;
+    private readonly IDefaultEntitiesProvider _defaultEntities = defaultEntities;
 
     public async Task<IEnumerable<ProductForListDto>> GetAllAsync(CancellationToken cancellationToken = default)
     {
@@ -37,6 +39,10 @@ public class ProductService
     public async Task CreateAsync(CreateProductRequest productDto, CancellationToken cancellationToken = default)
     {
         var product = _mapper.Map<Product>(productDto);
+        product.ImageUrl = "https://via.placeholder.com/150";
+        product.CreatedAt = DateTimeOffset.UtcNow;
+        product.Seller = await _defaultEntities.GetDefaultSellerAsync();
+
         await _productRepository.CreateAsync(product, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
     }

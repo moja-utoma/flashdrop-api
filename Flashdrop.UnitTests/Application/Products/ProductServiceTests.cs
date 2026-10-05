@@ -14,12 +14,14 @@ public class ProductServiceTests
     private readonly Mock<IUnitOfWork> _mockUnitOfWork;
     private readonly Mock<IRepository<Product>> _mockProductRepository;
     private readonly IMapper _mapper;
+    private readonly Mock<IDefaultEntitiesProvider> _mockDefaultEntities;
     private readonly ProductService _productService;
 
     public ProductServiceTests()
     {
         _mockUnitOfWork = new Mock<IUnitOfWork>();
         _mockProductRepository = new Mock<IRepository<Product>>();
+        _mockDefaultEntities = new Mock<IDefaultEntitiesProvider>();
 
         var mockLoggerFactory = new Mock<ILoggerFactory>();
         var mapperConfig = new MapperConfiguration(cfg =>
@@ -33,7 +35,8 @@ public class ProductServiceTests
         _productService = new ProductService(
             _mockUnitOfWork.Object,
             _mockProductRepository.Object,
-            _mapper);
+            _mapper,
+            _mockDefaultEntities.Object);
     }
 
     #region GetAllAsync Tests

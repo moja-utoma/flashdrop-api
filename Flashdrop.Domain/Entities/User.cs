@@ -20,5 +20,6 @@ public class User
 public enum UserRole
 {
     Customer,
+    Seller,
     Admin
 }
