@@ -1,4 +1,4 @@
-namespace Flashdrop.Data.Entities;
+namespace Flashdrop.Domain.Entities;
 
 /// <summary>
 /// Represents a hold on inventory during checkout.

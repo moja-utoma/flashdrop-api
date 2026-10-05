@@ -1,21 +1,30 @@
-namespace Flashdrop.Data.Entities;
+namespace Flashdrop.Domain.Entities;
 
 /// <summary>
-/// Represents an event ready to be published.
-/// Ensures that "decrement stock + create order" and "publish event to message broker"
-/// happen atomically from the app's point of view.
-/// Prevents message loss if the DB transaction succeeds but the broker publish fails.
+/// Provides an audit trail for notification attempts.
+/// Useful for demonstrating DLQ behavior and debugging notification failures.
 /// </summary>
-public class OutboxMessage
+public class NotificationLog
 {
     public Guid Id { get; set; }
-    public string Type { get; set; } = null!;
-    public string Payload { get; set; } = null!;
-    public DateTimeOffset CreatedAt { get; set; }
-    public DateTimeOffset? ProcessedAt { get; set; }
-    public int RetryCount { get; set; }
-    public Guid? OrderId { get; set; }
+    public Guid OrderId { get; set; }
+    public NotificationChannel Channel { get; set; }
+    public NotificationStatus Status { get; set; }
+    public int Attempts { get; set; }
+    public DateTimeOffset LastAttemptAt { get; set; }
 
     // Navigation property
-    public Order? Order { get; set; }
+    public Order Order { get; set; } = null!;
+}
+
+public enum NotificationChannel
+{
+    Email
+}
+
+public enum NotificationStatus
+{
+    Sent,
+    Failed,
+    DeadLettered
 }
