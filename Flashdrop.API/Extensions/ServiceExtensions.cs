@@ -1,11 +1,14 @@
 using Flashdrop.Application.Interfaces.Repositories;
 using Flashdrop.Application.Products;
+using Flashdrop.Application.Products.Validators;
 using Flashdrop.Data;
 using Flashdrop.Data.Extensions;
 using Flashdrop.Data.Repositories;
 using Flashdrop.Domain.Entities;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using RabbitMQ.Client;
+using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 
 namespace Flashdrop.API.Extensions;
 
@@ -21,6 +24,7 @@ public static class ServiceExtensions
         services.AddRepositories();
         services.AddBusinessServices();
         services.AddDatabaseSeeder();
+        services.AddValidation();
 
         return services;
     }
@@ -92,6 +96,14 @@ public static class ServiceExtensions
     private static IServiceCollection AddBusinessServices(this IServiceCollection services)
     {
         services.AddScoped<IProductService, ProductService>();
+
+        return services;
+    }
+
+    private static IServiceCollection AddValidation(this IServiceCollection services)
+    {
+        services.AddValidatorsFromAssemblyContaining<CreateProductRequestValidator>();
+        services.AddFluentValidationAutoValidation();
 
         return services;
     }
