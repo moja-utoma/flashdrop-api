@@ -1,5 +1,5 @@
 using Flashdrop.API.Extensions;
-using Flashdrop.Data.Extensions;
+using Flashdrop.Persistence.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

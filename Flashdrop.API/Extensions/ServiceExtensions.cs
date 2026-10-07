@@ -1,10 +1,10 @@
 using Flashdrop.Application.Interfaces.Repositories;
 using Flashdrop.Application.Products;
 using Flashdrop.Application.Products.Validators;
-using Flashdrop.Data;
-using Flashdrop.Data.Extensions;
-using Flashdrop.Data.Repositories;
 using Flashdrop.Domain.Entities;
+using Flashdrop.Persistence;
+using Flashdrop.Persistence.Extensions;
+using Flashdrop.Persistence.Repositories;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using RabbitMQ.Client;

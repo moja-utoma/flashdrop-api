@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Flashdrop.Data.Extensions;
+namespace Flashdrop.Persistence.Extensions;
 
 /// <summary>
 /// Extension methods for database seeding in dependency injection setup.

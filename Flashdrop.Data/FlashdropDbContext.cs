@@ -1,8 +1,8 @@
-using Flashdrop.Data.Configuration;
 using Flashdrop.Domain.Entities;
+using Flashdrop.Persistence.Configuration;
 using Microsoft.EntityFrameworkCore;
 
-namespace Flashdrop.Data;
+namespace Flashdrop.Persistence;
 
 public class FlashdropDbContext : DbContext
 {

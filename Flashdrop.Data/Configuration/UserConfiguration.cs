@@ -2,7 +2,7 @@ using Flashdrop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Flashdrop.Data.Configuration;
+namespace Flashdrop.Persistence.Configuration;
 
 public class UserConfiguration : IEntityTypeConfiguration<User>
 {

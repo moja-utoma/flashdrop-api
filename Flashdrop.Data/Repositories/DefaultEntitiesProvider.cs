@@ -2,7 +2,7 @@
 using Flashdrop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Flashdrop.Data.Repositories;
+namespace Flashdrop.Persistence.Repositories;
 
 /// <summary>
 /// Used for getting default entities during development while db is not fully set up

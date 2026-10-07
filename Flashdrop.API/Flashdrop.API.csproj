@@ -33,7 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Flashdrop.Application\Flashdrop.Application.csproj" />
-    <ProjectReference Include="..\Flashdrop.Data\Flashdrop.Data.csproj" />
+    <ProjectReference Include="..\Flashdrop.Data\Flashdrop.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
