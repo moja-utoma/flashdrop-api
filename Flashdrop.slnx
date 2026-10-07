@@ -5,5 +5,6 @@
   </Folder>
   <Project Path="Flashdrop.API/Flashdrop.API.csproj" />
   <Project Path="Flashdrop.Application/Flashdrop.Application.csproj" Id="fbfa976e-b7d3-4a33-a6bd-7d7467a3f474" />
-  <Project Path="Flashdrop.Data/Flashdrop.Data.csproj" />
+  <Project Path="Flashdrop.Data/Flashdrop.Persistence.csproj" />
+  <Project Path="Flashdrop.Domain/Flashdrop.Domain.csproj" Id="7254fe6d-000d-4034-bbcb-15a110151390" />
 </Solution>

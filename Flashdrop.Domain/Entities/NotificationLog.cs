@@ -1,4 +1,4 @@
-namespace Flashdrop.Data.Entities;
+namespace Flashdrop.Domain.Entities;
 
 /// <summary>
 /// Provides an audit trail for notification attempts.

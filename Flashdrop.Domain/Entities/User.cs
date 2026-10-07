@@ -1,4 +1,4 @@
-namespace Flashdrop.Data.Entities;
+namespace Flashdrop.Domain.Entities;
 
 /// <summary>
 /// Represents a user in the system with either Customer or Admin role.
@@ -20,5 +20,6 @@ public class User
 public enum UserRole
 {
     Customer,
+    Seller,
     Admin
 }
