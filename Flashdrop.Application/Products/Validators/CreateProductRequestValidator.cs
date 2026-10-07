@@ -8,16 +8,20 @@ public class CreateProductRequestValidator : AbstractValidator<CreateProductRequ
     {
         RuleFor(x => x.Name)
             .NotEmpty()
-            .MaximumLength(200);
+                .WithMessage("Product name is required.")
+            .MaximumLength(200)
+                .WithMessage("Product name cannot exceed 200 characters.");
 
         RuleFor(x => x.Description)
-            .NotEmpty();
+            .NotEmpty()
+                .WithMessage("Product description is required.");
 
         RuleFor(x => x.BasePrice)
-            .GreaterThan(0);
+            .GreaterThan(0)
+                .WithMessage("Base price must be greater than zero.");
 
         RuleFor(x => x.Category)
             .IsInEnum()
-            .WithMessage("Category must be a valid product category.");
+                .WithMessage("Category must be a valid product category.");
     }
 }
