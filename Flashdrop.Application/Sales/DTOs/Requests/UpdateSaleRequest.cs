@@ -1,3 +1,3 @@
 ﻿namespace Flashdrop.Application.Sales.DTOs.Requests;
 
-public record UpdateSaleRequest();
+public record UpdateSaleRequest(); // TODO
