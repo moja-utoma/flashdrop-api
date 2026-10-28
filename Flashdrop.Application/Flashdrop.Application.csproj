@@ -15,8 +15,4 @@
     <ProjectReference Include="..\Flashdrop.Domain\Flashdrop.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Sales\Validators\" />
-  </ItemGroup>
-
 </Project>

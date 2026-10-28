@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Flashdrop.Persistence.Repositories;
 
-public class SalesRepository(FlashdropDbContext context) : IRepository<Sale>
+public class SaleRepository(FlashdropDbContext context) : IRepository<Sale>
 {
     private readonly FlashdropDbContext _context = context;
     

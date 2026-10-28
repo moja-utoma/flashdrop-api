@@ -1,5 +1,5 @@
-﻿using Flashdrop.Application.Sales.DTOs.Requests;
-using Flashdrop.Domain.Entities;
+﻿using Flashdrop.Application.Sales;
+using Flashdrop.Application.Sales.DTOs.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Flashdrop.API.Controllers;
@@ -15,35 +15,42 @@ namespace Flashdrop.API.Controllers;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
-public class SalesController : ControllerBase
+public class SalesController(ISalesService salesService) : ControllerBase
 {
+    private readonly ISalesService _salesService = salesService;
+
     [HttpGet]
-    public Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll(CancellationToken token)
     {
-        throw new NotImplementedException();
+        var sales = await _salesService.GetAllAsync(token);
+        return Ok(sales);
     }
-    
+
     [HttpGet("{id}")]
-    public Task<IActionResult> GetById(int id)
+    public async Task<IActionResult> GetById(Guid id, CancellationToken token)
     {
-        throw new NotImplementedException();
+        var sale = await _salesService.GetByIdAsync(id, token);
+        return Ok(sale);
     }
-    
+
     [HttpPost]
-    public Task<IActionResult> Create([FromBody] CreateSaleRequest saleDto, CancellationToken token)
+    public async Task<IActionResult> Create([FromBody] CreateSaleRequest saleDto, CancellationToken token)
     {
-        throw new NotImplementedException();
+        var saleId = await _salesService.CreateAsync(saleDto, token);
+        return Ok(saleId);
     }
-    
+
     [HttpPut("{id}")]
-    public Task<IActionResult> Update(Guid id, [FromBody] UpdateSaleRequest saleDto, CancellationToken token) 
+    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateSaleRequest saleDto, CancellationToken token)
     {
-        throw new NotImplementedException();
+        await _salesService.UpdateAsync(id, saleDto, token);
+        return NoContent();
     }
 
     [HttpDelete("{id}")]
-    public Task<IActionResult> Delete(Guid id, CancellationToken token)
+    public async Task<IActionResult> Delete(Guid id, CancellationToken token)
     {
-        throw new NotImplementedException();
+        await _salesService.DeleteAsync(id, token);
+        return NoContent();
     }
 }
