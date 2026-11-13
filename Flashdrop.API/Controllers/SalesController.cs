@@ -30,6 +30,10 @@ public class SalesController(ISalesService salesService) : ControllerBase
     public async Task<IActionResult> GetById(Guid id, CancellationToken token)
     {
         var sale = await _salesService.GetByIdAsync(id, token);
+        
+        if (sale is null)
+            return NotFound();
+        
         return Ok(sale);
     }
 
