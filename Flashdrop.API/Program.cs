@@ -1,10 +1,13 @@
 using Flashdrop.API.Extensions;
+using Flashdrop.API.ExceptionHandling;
 using Flashdrop.Persistence.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 builder.Services.AddApplicationServices(builder.Configuration);
 
 var app = builder.Build();
@@ -19,6 +22,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseExceptionHandler();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
@@ -32,3 +36,5 @@ if (app.Environment.IsDevelopment())
 }
 
 app.Run();
+
+public partial class Program;

@@ -25,6 +25,18 @@ bld/
 
 .vs/
 
+# JetBrains Rider
+.idea/
+.idea_modules/
+*.iml
+*.ipr
+*.iws
+*.sln.iml
+*.DotSettings.user
+_ReSharper*/
+*.resharper.user
+atlassian-ide-plugin.xml
+
 # .NET Core
 project.lock.json
 project.fragment.lock.json

@@ -1,6 +1,8 @@
 using Flashdrop.Application.Interfaces.Repositories;
 using Flashdrop.Application.Products;
 using Flashdrop.Application.Products.Validators;
+using Flashdrop.Application.Sales;
+using Flashdrop.Application.Sales.Validators;
 using Flashdrop.Domain.Entities;
 using Flashdrop.Persistence;
 using Flashdrop.Persistence.Extensions;
@@ -80,6 +82,7 @@ public static class ServiceExtensions
     private static IServiceCollection AddMappings(this IServiceCollection services)
     {
         services.AddAutoMapper(cfg => { }, typeof(ProductsProfile).Assembly);
+        services.AddAutoMapper(cfg => { }, typeof(SalesProfile).Assembly);
 
         return services;
     }
@@ -88,6 +91,7 @@ public static class ServiceExtensions
     {
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IRepository<Product>, ProductRepository>();
+        services.AddScoped<IRepository<Sale>, SaleRepository>();
         services.AddScoped<IDefaultEntitiesProvider, DefaultEntitiesProvider>();
 
         return services;
@@ -96,6 +100,7 @@ public static class ServiceExtensions
     private static IServiceCollection AddBusinessServices(this IServiceCollection services)
     {
         services.AddScoped<IProductService, ProductService>();
+        services.AddScoped<ISalesService, SalesService>();
 
         return services;
     }
@@ -103,6 +108,11 @@ public static class ServiceExtensions
     private static IServiceCollection AddValidation(this IServiceCollection services)
     {
         services.AddValidatorsFromAssemblyContaining<CreateProductRequestValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateProductRequestValidator>();
+        
+        services.AddValidatorsFromAssemblyContaining<CreateSaleRequestValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateSaleRequestValidator>();
+        
         services.AddFluentValidationAutoValidation();
 
         return services;
