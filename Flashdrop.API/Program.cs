@@ -1,14 +1,14 @@
 using Flashdrop.API.Extensions;
-using Flashdrop.API.ExceptionHandling;
+using Flashdrop.Application;
+using Flashdrop.Infrastructure;
 using Flashdrop.Infrastructure.Data.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllers();
-builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
-builder.Services.AddProblemDetails();
-builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services
+    .AddApplication()
+    .AddInfrastructure(builder.Configuration)
+    .AddApi();
 
 var app = builder.Build();
 
