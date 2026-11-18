@@ -1,8 +1,9 @@
 ﻿using Flashdrop.Application.Interfaces.Repositories;
 using Flashdrop.Domain.Entities;
+using Flashdrop.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Flashdrop.Persistence.Repositories;
+namespace Flashdrop.Infrastructure.Data.Repositories;
 
 public class SaleRepository(FlashdropDbContext context) : IRepository<Sale>
 {

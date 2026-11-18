@@ -1,6 +1,6 @@
 ﻿using Flashdrop.Application.Interfaces.Repositories;
 
-namespace Flashdrop.Persistence;
+namespace Flashdrop.Infrastructure.Data;
 
 public class UnitOfWork
     (FlashdropDbContext context) : IUnitOfWork

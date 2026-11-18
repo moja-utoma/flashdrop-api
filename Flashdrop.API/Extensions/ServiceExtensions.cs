@@ -1,120 +1,23 @@
-using Flashdrop.Application.Interfaces.Repositories;
-using Flashdrop.Application.Products;
-using Flashdrop.Application.Products.Validators;
-using Flashdrop.Application.Sales;
-using Flashdrop.Application.Sales.Validators;
-using Flashdrop.Domain.Entities;
-using Flashdrop.Persistence;
-using Flashdrop.Persistence.Extensions;
-using Flashdrop.Persistence.Repositories;
-using FluentValidation;
-using Microsoft.EntityFrameworkCore;
-using RabbitMQ.Client;
+using Flashdrop.API.ExceptionHandling;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 
 namespace Flashdrop.API.Extensions;
 
 public static class ServiceExtensions
 {
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddApi(this IServiceCollection services)
     {
-        services.AddDatabase(configuration);
-        services.AddSwaggerDocumentation();
-        services.AddRedisCache(configuration);
-        services.AddRabbitMq(configuration);
-        services.AddMappings();
-        services.AddRepositories();
-        services.AddBusinessServices();
-        services.AddDatabaseSeeder();
-        services.AddValidation();
+        services.AddControllers();
+        services.AddExceptionHandler<GlobalExceptionHandler>();
+        services.AddProblemDetails();
 
-        return services;
-    }
-
-    private static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
-    {
-        services.AddDbContext<FlashdropDbContext>(options =>
-        {
-            options.UseSqlServer(
-                configuration.GetConnectionString("DefaultConnection"),
-                sqlOptions => sqlOptions.MigrationsAssembly("Flashdrop.Data"));
-        });
-
-        return services;
-    }
-
-    private static IServiceCollection AddSwaggerDocumentation(this IServiceCollection services)
-    {
         services.AddOpenApi();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
 
-        return services;
-    }
-
-    private static IServiceCollection AddRedisCache(this IServiceCollection services, IConfiguration configuration)
-    {
-        services.AddStackExchangeRedisCache(options =>
-        {
-            options.Configuration = configuration.GetConnectionString("Redis");
-        });
-
-        return services;
-    }
-
-    private static IServiceCollection AddRabbitMq(this IServiceCollection services, IConfiguration configuration)
-    {
-        services.AddSingleton<IConnectionFactory>(_ =>
-        {
-            var section = configuration.GetSection("RabbitMq");
-            return new ConnectionFactory
-            {
-                HostName = section["HostName"],
-                Port = int.Parse(section["Port"]!),
-                UserName = section["UserName"],
-                Password = section["Password"]
-            };
-        });
-
-        return services;
-    }
-
-    private static IServiceCollection AddMappings(this IServiceCollection services)
-    {
-        services.AddAutoMapper(cfg => { }, typeof(ProductsProfile).Assembly);
-        services.AddAutoMapper(cfg => { }, typeof(SalesProfile).Assembly);
-
-        return services;
-    }
-
-    private static IServiceCollection AddRepositories(this IServiceCollection services)
-    {
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<IRepository<Product>, ProductRepository>();
-        services.AddScoped<IRepository<Sale>, SaleRepository>();
-        services.AddScoped<IDefaultEntitiesProvider, DefaultEntitiesProvider>();
-
-        return services;
-    }
-
-    private static IServiceCollection AddBusinessServices(this IServiceCollection services)
-    {
-        services.AddScoped<IProductService, ProductService>();
-        services.AddScoped<ISalesService, SalesService>();
-
-        return services;
-    }
-
-    private static IServiceCollection AddValidation(this IServiceCollection services)
-    {
-        services.AddValidatorsFromAssemblyContaining<CreateProductRequestValidator>();
-        services.AddValidatorsFromAssemblyContaining<UpdateProductRequestValidator>();
-        
-        services.AddValidatorsFromAssemblyContaining<CreateSaleRequestValidator>();
-        services.AddValidatorsFromAssemblyContaining<UpdateSaleRequestValidator>();
-        
         services.AddFluentValidationAutoValidation();
 
         return services;
     }
+
 }
