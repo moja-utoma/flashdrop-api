@@ -1,6 +1,6 @@
 using Flashdrop.API.Extensions;
 using Flashdrop.API.ExceptionHandling;
-using Flashdrop.Persistence.Extensions;
+using Flashdrop.Infrastructure.Data.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

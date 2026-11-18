@@ -1,7 +1,7 @@
 using Flashdrop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Flashdrop.Persistence;
+namespace Flashdrop.Infrastructure.Data;
 
 public class DatabaseSeeder(FlashdropDbContext context)
 {

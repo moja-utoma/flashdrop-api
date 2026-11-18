@@ -2,7 +2,7 @@ using Flashdrop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Flashdrop.Persistence.Configuration;
+namespace Flashdrop.Infrastructure.Data.Configuration;
 
 public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
 {
